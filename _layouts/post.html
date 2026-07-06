@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<article class="page-hero">
+  <div class="wrap">
+    <p class="hero-name">{{ page.date | date: "%d.%m.%Y" }}{% if page.categories contains 'japan' %} · Япония{% elsif page.categories contains 'blog' %} · Блог{% elsif page.categories contains 'guides' %} · Гайд{% endif %}</p>
+    <h1 class="page-title">{{ page.title }}</h1>
+  </div>
+</article>
+<section class="section post-body">
+  <div class="wrap">
+    <div class="prose">
+      {{ content }}
+    </div>
+    <p class="back-link"><a href="{% if page.categories contains 'blog' %}{{ '/blog/' | relative_url }}{% elsif page.categories contains 'guides' or page.categories contains 'japan' %}{{ '/japan/' | relative_url }}{% else %}{{ '/' | relative_url }}{% endif %}">← назад</a></p>
+  </div>
+</section>

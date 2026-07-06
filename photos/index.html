@@ -1,0 +1,53 @@
+---
+layout: default
+title: Фото
+description: Фотоальбомы — плёнка и iPhone
+---
+<section class="page-hero">
+  <div class="wrap">
+    <h1 class="page-title">Фото</h1>
+    <p class="page-intro">Альбомы: сканы с плёнки и кадры с iPhone 12 Pro.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    <div class="switch" role="group" aria-label="Тип альбомов">
+      <button type="button" data-tab="film" aria-pressed="true">Плёнка</button>
+      <button type="button" data-tab="iphone" aria-pressed="false">iPhone 12 Pro</button>
+    </div>
+
+    {% assign film = site.albums | where: "type", "film" | sort: "date" | reverse %}
+    {% assign iphone = site.albums | where: "type", "iphone" | sort: "date" | reverse %}
+
+    <div class="albums" id="tab-film">
+      {% if film.size > 0 %}
+        {% for album in film %}
+          {% include album-card.html album=album %}
+        {% endfor %}
+      {% else %}
+        <div class="empty-state">Плёночных альбомов пока нет.</div>
+      {% endif %}
+    </div>
+
+    <div class="albums" id="tab-iphone" hidden>
+      {% if iphone.size > 0 %}
+        {% for album in iphone %}
+          {% include album-card.html album=album %}
+        {% endfor %}
+      {% else %}
+        <div class="empty-state">Альбомов с телефона пока нет.</div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+<script>
+document.querySelectorAll('.switch button').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    document.querySelectorAll('.switch button').forEach(function (b) {
+      b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+    });
+    document.getElementById('tab-film').hidden = btn.dataset.tab !== 'film';
+    document.getElementById('tab-iphone').hidden = btn.dataset.tab !== 'iphone';
+  });
+});
+</script>

@@ -1,0 +1,89 @@
+---
+layout: default
+title: Япония
+description: Заметки о Японии, карта мест и гайды
+---
+<section class="page-hero">
+  <div class="wrap">
+    <h1 class="page-title">Япония</h1>
+    <p class="page-intro">Заметки о поездках, карта сохранённых мест и гайды: маршруты, шоппинг, что попробовать.</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="map-label">
+  <div class="wrap">
+    <p class="section-label" id="map-label">Карта мест</p>
+    <div class="map-box"><div id="map" role="application" aria-label="Карта мест Японии"></div></div>
+    <p class="map-hint" id="map-status">Карта берёт точки из файла <code>assets/places.kml</code> — замени его свежим экспортом из Place Collector, и булавки обновятся.</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="notes-label">
+  <div class="wrap">
+    <p class="section-label" id="notes-label">Заметки</p>
+    {% assign notes = site.categories.japan %}
+    {% if notes and notes.size > 0 %}
+    <div class="note-list">
+      {% for post in notes %}
+      <a class="note" href="{{ post.url | relative_url }}"><span class="note-title">{{ post.title }}</span><span class="note-date">{{ post.date | date: "%d.%m.%Y" }}</span></a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">Заметок пока нет — первая появится, как только ты добавишь файл в japan/_posts.</div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section" aria-labelledby="guides-label">
+  <div class="wrap">
+    <p class="section-label" id="guides-label">Гайды</p>
+    {% assign guides = site.categories.guides %}
+    {% if guides and guides.size > 0 %}
+    <div class="note-list">
+      {% for post in guides %}
+      <a class="note" href="{{ post.url | relative_url }}"><span class="note-title">{{ post.title }}</span><span class="note-date">{{ post.date | date: "%d.%m.%Y" }}</span></a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">Гайдов пока нет.</div>
+    {% endif %}
+  </div>
+</section>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var map = L.map('map').setView([36.2, 138.25], 5);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19, attribution: '&copy; OpenStreetMap'
+  }).addTo(map);
+  var pin = L.divIcon({ className: '', iconSize: [14,14], iconAnchor: [7,7],
+    html: '<div style="width:14px;height:14px;border-radius:50%;background:#E97A80;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3)"></div>' });
+  var status = document.getElementById('map-status');
+
+  fetch('{{ "/assets/places.kml" | relative_url }}')
+    .then(function (r) { if (!r.ok) throw new Error(); return r.text(); })
+    .then(function (text) {
+      var doc = new DOMParser().parseFromString(text, 'text/xml');
+      var pms = doc.getElementsByTagName('Placemark');
+      var bounds = [];
+      for (var i = 0; i < pms.length; i++) {
+        var c = pms[i].getElementsByTagName('coordinates')[0];
+        if (!c) continue;
+        var p = c.textContent.trim().split(/\s+/)[0].split(',');
+        var lng = parseFloat(p[0]), lat = parseFloat(p[1]);
+        if (isNaN(lat) || isNaN(lng)) continue;
+        var m = L.marker([lat, lng], { icon: pin }).addTo(map);
+        var n = pms[i].getElementsByTagName('name')[0];
+        if (n) m.bindPopup(n.textContent);
+        bounds.push([lat, lng]);
+      }
+      if (bounds.length) {
+        map.fitBounds(bounds, { padding: [40, 40] });
+        status.textContent = 'Точек на карте: ' + bounds.length + '. Чтобы обновить — замени файл assets/places.kml свежим экспортом из Place Collector.';
+      }
+    })
+    .catch(function () { /* файла ещё нет — подсказка уже на экране */ });
+});
+</script>

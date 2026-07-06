@@ -1,0 +1,73 @@
+---
+layout: default
+title: Как обновлять сайт
+---
+<section class="page-hero howto">
+  <div class="wrap">
+    <h1 class="page-title">Как обновлять сайт</h1>
+    <p class="page-intro">Личная шпаргалка. Всё делается на сайте github.com, в репозитории truezizara.github.io. После любого сохранения (Commit) сайт обновляется сам за 1–2 минуты.</p>
+  </div>
+</section>
+<section class="section howto">
+  <div class="wrap">
+    <div class="prose">
+
+<h2>✏️ Добавить заметку о Японии</h2>
+<div class="step">
+<p>1. Открой папку <code>japan/_posts</code> → кнопка <strong>Add file → Create new file</strong>.</p>
+<p>2. Имя файла: <code>2026-07-15-nazvanie-latinicej.md</code> — сначала дата, потом короткое название латиницей, в конце <code>.md</code>.</p>
+<p>3. В само поле вставь шаблон и пиши текст ниже трёх дефисов:</p>
+<p><code>---</code><br><code>title: "Заголовок заметки по-русски"</code><br><code>---</code><br><br>Дальше обычный текст. Пустая строка — новый абзац.</p>
+<p>4. Зелёная кнопка <strong>Commit changes</strong>. Всё — заметка на сайте, в списке на странице «Япония».</p>
+</div>
+
+<h2>💬 Добавить пост в Блог</h2>
+<div class="step">
+<p>То же самое, но в папке <code>blog/_posts</code>. Скопировала пост из Телеграма → вставила под шапкой с title → Commit.</p>
+</div>
+
+<h2>🗺 Добавить гайд</h2>
+<div class="step">
+<p>То же самое, папка <code>guides/_posts</code>. Гайд появится на странице «Япония» в секции «Гайды».</p>
+</div>
+
+<h2>📷 Добавить фотоальбом</h2>
+<div class="step">
+<p>Два шага.</p>
+<p><strong>Шаг 1 — фотки.</strong> Открой папку <code>photos</code> → <strong>Add file → Upload files</strong>. Чтобы создать новую папку: <strong>Create new file</strong>, в поле имени набери <code>kioto-2026/temp.md</code> (слэш создаёт папку), закоммить, затем зайди в неё и загрузи фото через Upload files (а temp.md удали). Либо проще: Upload files и перетащи с компьютера сразу <em>папку</em> с фотографиями — она приедет вместе с именем.</p>
+<p><strong>Шаг 2 — карточка альбома.</strong> В папке <code>_albums</code> создай файл <code>kioto-2026.md</code> с шапкой:</p>
+<p><code>---</code><br><code>title: "Киото весной"</code><br><code>date: 2026-04-10</code><br><code>type: film</code><br><code>folder: kioto-2026</code><br><code>---</code></p>
+<p><code>type</code> — это <code>film</code> (плёнка) или <code>iphone</code>. <code>folder</code> — имя папки с фотками из шага 1. Всё: альбом появился на странице «Фото» в нужной вкладке, лента собралась сама.</p>
+<p>Обложка альбома — первое фото по алфавиту. Хочешь конкретное — назови файл <code>cover.jpg</code>.</p>
+<p>Совет: перед загрузкой ужимай фото до 1600–2000 px по длинной стороне — быстрее грузится и место в репозитории не кончится.</p>
+</div>
+
+<h2>📍 Обновить карту Японии</h2>
+<div class="step">
+<p>Экспортируй KML из Place Collector, переименуй файл в <code>places.kml</code> и загрузи в папку <code>assets</code> (Upload files — файл с тем же именем перезапишется). Точки на карте обновятся сами.</p>
+</div>
+
+<h2>🖼 Вставить фото внутрь заметки</h2>
+<div class="step">
+<p>1. Загрузи картинку в папку <code>assets</code>.</p>
+<p>2. В тексте заметки напиши строку: <code>![что на фото](/assets/imya-fajla.jpg)</code></p>
+</div>
+
+<h2>🔧 Поправить опечатку где угодно</h2>
+<div class="step">
+<p>Найди файл → иконка карандаша ✏️ справа сверху → правишь → Commit changes.</p>
+</div>
+
+<h2>⚠️ Что лучше не трогать</h2>
+<div class="step">
+<p>Папки <code>_layouts</code>, <code>_includes</code>, <code>css</code>, файл <code>_config.yml</code> — это внутренности. Если что-то в них захочется поменять — приходи ко мне с редакцией 🙂</p>
+</div>
+
+<h2>🆘 Если сайт «сломался»</h2>
+<div class="step">
+<p>Чаще всего — из-за шапки файла: три дефиса сверху и снизу, а заголовок в кавычках. GitHub пришлёт письмо «Page build failed», если сборка не удалась — просто проверь последний изменённый файл. И помни: в git ничего не теряется, любую правку можно откатить.</p>
+</div>
+
+    </div>
+  </div>
+</section>

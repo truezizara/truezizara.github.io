@@ -1,0 +1,25 @@
+---
+layout: default
+title: Блог
+description: Посты из телеграм-канала
+---
+<section class="page-hero">
+  <div class="wrap">
+    <h1 class="page-title">Блог</h1>
+    <p class="page-intro">Посты из телеграм-канала — о том о сём.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    {% assign posts = site.categories.blog %}
+    {% if posts and posts.size > 0 %}
+    <div class="note-list">
+      {% for post in posts %}
+      <a class="note" href="{{ post.url | relative_url }}"><span class="note-title">{{ post.title }}</span><span class="note-date">{{ post.date | date: "%d.%m.%Y" }}</span></a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">Постов пока нет — первый появится из папки blog/_posts.</div>
+    {% endif %}
+  </div>
+</section>

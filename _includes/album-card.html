@@ -1,0 +1,9 @@
+{% assign folder_path = '/photos/' | append: include.album.folder | append: '/' %}
+{% assign shots = site.static_files | where_exp: "f", "f.path contains folder_path" | sort: "path" %}
+{% assign cover = shots | where_exp: "f", "f.basename == 'cover'" | first %}
+{% unless cover %}{% assign cover = shots | first %}{% endunless %}
+<a class="album" href="{{ include.album.url | relative_url }}">
+  <div class="album-cover">{% if cover %}<img src="{{ cover.path | relative_url }}" alt="" loading="lazy">{% else %}пока пусто{% endif %}</div>
+  <div class="album-name">{{ include.album.title }}</div>
+  <div class="album-meta">{% if include.album.type == 'film' %}плёнка{% else %}iPhone 12 Pro{% endif %} · {{ include.album.date | date: "%Y" }}</div>
+</a>

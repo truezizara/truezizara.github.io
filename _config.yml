@@ -1,0 +1,28 @@
+title: zizara
+description: Личный сайт Алисы Томиловой
+url: "https://truezizara.github.io"
+lang: ru
+timezone: Europe/Moscow
+
+markdown: kramdown
+permalink: /:categories/:title/
+
+collections:
+  albums:
+    output: true
+    permalink: /photos/:name/
+
+defaults:
+  - scope:
+      type: posts
+    values:
+      layout: post
+  - scope:
+      type: albums
+    values:
+      layout: album
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
