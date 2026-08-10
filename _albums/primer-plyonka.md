@@ -1,7 +1,14 @@
 ---
-title: "Пример альбома"
-date: 2026-07-06
+title: New York 2025
+date: 2025-12-25
 type: film
-folder: primer-plyonka
-description: "Альбом-образец: удали меня, когда зальёшь настоящий."
+folder: ny25
+description: ''
+photos:
+  - /photos/zagruzheno/R1-01933-0036.JPG
+  - /photos/zagruzheno/R1-01933-0019.JPG
+  - /photos/zagruzheno/R1-01933-0000_0001.JPG
+  - /photos/zagruzheno/R1-01933-0003.JPG
+  - /photos/zagruzheno/R1-01933-0032.JPG
+  - /photos/zagruzheno/R1-01933-0031.JPG
 ---
