@@ -1,0 +1,88 @@
+backend:
+  name: github
+  repo: truezizara/truezizara.github.io
+  branch: main
+
+# куда складываются загруженные фотографии по умолчанию
+media_folder: "photos/zagruzheno"
+public_folder: "/photos/zagruzheno"
+
+# язык интерфейса
+locale: ru
+
+collections:
+  # ---------- Заметки о Японии ----------
+  - name: japan
+    label: "Япония — заметки"
+    label_singular: "заметку"
+    folder: "japan/_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "japan/{{slug}}/"
+    fields:
+      - { name: title, label: "Заголовок", widget: string }
+      - { name: date, label: "Дата", widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false, default: "" }
+      - { name: body, label: "Текст", widget: markdown }
+
+  # ---------- Блог (посты из Телеграма) ----------
+  - name: blog
+    label: "Блог — посты"
+    label_singular: "пост"
+    folder: "blog/_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "blog/{{slug}}/"
+    fields:
+      - { name: title, label: "Заголовок", widget: string }
+      - { name: date, label: "Дата", widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false, default: "" }
+      - { name: body, label: "Текст", widget: markdown }
+
+  # ---------- Гайды ----------
+  - name: guides
+    label: "Гайды"
+    label_singular: "гайд"
+    folder: "guides/_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "japan/{{slug}}/"
+    fields:
+      - { name: title, label: "Заголовок", widget: string }
+      - { name: date, label: "Дата", widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false, default: "" }
+      - { name: body, label: "Текст", widget: markdown }
+
+  # ---------- Фотоальбомы ----------
+  - name: albums
+    label: "Фотоальбомы"
+    label_singular: "альбом"
+    folder: "_albums"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: "Название альбома", widget: string }
+      - { name: date, label: "Дата", widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false, default: "" }
+      - name: type
+        label: "Тип съёмки"
+        widget: select
+        options:
+          - { label: "Плёнка", value: "film" }
+          - { label: "iPhone", value: "iphone" }
+        default: "film"
+      - { name: folder, label: "Имя папки с фото (латиницей, без пробелов)", widget: string, hint: "например kioto-2026 — сюда загрузятся фотографии" }
+      - { name: description, label: "Описание (необязательно)", widget: string, required: false }
+      - name: photos
+        label: "Фотографии"
+        widget: list
+        required: false
+        summary: "{{fields.image}}"
+        field: { name: image, label: "Фото", widget: image }
+
+  # ---------- Страница «Обо мне» ----------
+  - name: pages
+    label: "Страницы"
+    files:
+      - name: about
+        label: "Обо мне"
+        file: "about/about.md"
+        fields:
+          - { name: title, label: "Заголовок", widget: hidden, default: "Обо мне" }
+          - { name: body, label: "Текст", widget: markdown }
