@@ -2,14 +2,12 @@ backend:
   name: github
   repo: truezizara/truezizara.github.io
   branch: main
-
+  base_url: https://sveltia-cms-auth.zizara.workers.dev
 # куда складываются загруженные фотографии по умолчанию
 media_folder: "photos/zagruzheno"
 public_folder: "/photos/zagruzheno"
-
 # язык интерфейса
 locale: ru
-
 collections:
   # ---------- Заметки о Японии ----------
   - name: japan
@@ -23,7 +21,6 @@ collections:
       - { name: title, label: "Заголовок", widget: string }
       - { name: date, label: "Дата", widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false, default: "" }
       - { name: body, label: "Текст", widget: markdown }
-
   # ---------- Блог (посты из Телеграма) ----------
   - name: blog
     label: "Блог — посты"
@@ -36,7 +33,6 @@ collections:
       - { name: title, label: "Заголовок", widget: string }
       - { name: date, label: "Дата", widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false, default: "" }
       - { name: body, label: "Текст", widget: markdown }
-
   # ---------- Гайды ----------
   - name: guides
     label: "Гайды"
@@ -49,7 +45,6 @@ collections:
       - { name: title, label: "Заголовок", widget: string }
       - { name: date, label: "Дата", widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false, default: "" }
       - { name: body, label: "Текст", widget: markdown }
-
   # ---------- Фотоальбомы ----------
   - name: albums
     label: "Фотоальбомы"
@@ -75,7 +70,6 @@ collections:
         required: false
         summary: "{{fields.image}}"
         field: { name: image, label: "Фото", widget: image }
-
   # ---------- Страница «Обо мне» ----------
   - name: pages
     label: "Страницы"
