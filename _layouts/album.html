@@ -3,6 +3,7 @@ layout: default
 ---
 <section class="page-hero">
   <div class="wrap">
+    <p class="back-link"><a href="{{ '/photos/' | relative_url }}">← ко всем альбомам</a></p>
     <p class="hero-name">{{ page.date | date: "%d.%m.%Y" }} · {% if page.type == 'film' %}плёнка{% else %}iPhone 12 Pro{% endif %}</p>
     <h1 class="page-title">{{ page.title }}</h1>
     {% if page.description %}<p class="page-intro">{{ page.description }}</p>{% endif %}
@@ -19,7 +20,6 @@ layout: default
     {% else %}
     <div class="empty-state">В этом альбоме пока нет фотографий — добавь их в админке и сохрани.</div>
     {% endif %}
-    <p class="back-link"><a href="{{ '/photos/' | relative_url }}">← ко всем альбомам</a></p>
   </div>
 </section>
 <div class="lightbox" id="lightbox" hidden><img src="" alt=""></div>
