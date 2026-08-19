@@ -1,5 +1,5 @@
 ---
-title: Japan '24 pt.1
+title: Japan '24
 date: 2026-08-16
 type: film
 folder: japan24
